@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base",
+  "plugins": [
+    "import"
+  ],
+  "env": {
+    "protractor": true
+  },
+  "rules": {
+    "no-underscore-dangle": "off"
+  }
+}
