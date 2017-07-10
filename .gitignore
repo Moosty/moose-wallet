@@ -1,0 +1,14 @@
+.DS_Store
+dist/*
+node_modules
+npm-debug.log
+src/.nyc_output
+coverage
+e2e-test-screenshots
+app/report.html
+app/*.map
+*.sw[pon]
+app/app.js
+.vscode
+.idea
+package-lock.json

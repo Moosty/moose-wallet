@@ -1,0 +1,32 @@
+version: 0.0.1-{build}
+os: unstable
+
+platform:
+  - Any CPU
+
+branches:
+  only:
+    - master
+
+environment:
+  NODE_ENV: prod
+  matrix:
+    - nodejs_version: 6
+
+cache:
+  - node_modules
+
+install:
+  - ps: Install-Product node 7 x64
+  - set CI=true
+  - npm install -g npm@latest
+  - set PATH=%APPDATA%\npm;%PATH%
+  - npm install
+
+build_script:
+  - npm run dist
+
+artifacts:
+  - path: dist/*.exe
+
+test: off

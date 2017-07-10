@@ -1,0 +1,10 @@
+{
+  "name": "moose-wallet",
+  "version": "0.0.1",
+  "description": "MooseCoin Wallet",
+  "main": "main.js",
+  "author":{
+    "name": "MooseCoin",
+    "email": "admin@moosecoin.io"
+  }
+}
