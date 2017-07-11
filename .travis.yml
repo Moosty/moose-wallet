@@ -28,6 +28,7 @@ install:
 - npm install -g xvfb-maybe
 - npm install -g npm
 - npm install -g webpack
+- npm install
 script:
 - npm -v
 - node -v
