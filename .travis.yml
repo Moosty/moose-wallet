@@ -28,6 +28,7 @@ install:
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - source ~/.bashrc
 - npm install -g xvfb-maybe
+- npm install -g npm
 - npm install -g webpack
 script:
 - npm run dist
