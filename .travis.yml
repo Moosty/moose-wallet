@@ -29,7 +29,7 @@ install:
 - npm install -g npm
 - npm install -g webpack
 - npm install
-- npm install eslint-config-airbnb
+- npm install eslint-config-airbnb-base
 script:
 - npm run dist
 branches:
