@@ -24,13 +24,13 @@ before_install:
   | tar -xz -C /tmp/git-lfs --strip-components 1 && /tmp/git-lfs/git-lfs pull
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils; fi
 install:
-- nvm install 7
-- curl -o- -L https://yarnpkg.com/install.sh | bash
-- source ~/.bashrc
+- nvm install 8
 - npm install -g xvfb-maybe
 - npm install -g npm
 - npm install -g webpack
 script:
+- npm -v
+- node -v
 - npm run dist
 branches:
   only:
