@@ -15,7 +15,8 @@
     "dist:win": "node build.js && build --win",
     "dist:mac": "build --mac",
     "dist:linux": "build --linux",
-    "dist": "npm run builder && build --publish=never",
+    "dist": "npm run builder && build",
+    "distApp": "npm run builder && build --publish=never",
     "build:clean": "cross-env BUILD_TARGET=clean node build.js",
     "build": "node build.js"
   },
