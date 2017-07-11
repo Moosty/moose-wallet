@@ -36,3 +36,11 @@ branches:
   only:
   - master
   - testnet-development
+deploy:
+  provider: releases
+  file: "dist/*.dmg"
+  file: "dist/*.zip"
+  file: "dist/*.AppImage"
+  skip_cleanup: true
+  on:
+    tags: true
