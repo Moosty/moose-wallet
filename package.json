@@ -15,9 +15,9 @@
     "dist:win": "node build.js && build --win",
     "dist:mac": "build --mac",
     "dist:linux": "build --linux",
-    "dist": "npm run buildtmp && build --publish=never",
+    "dist": "npm run build && build",
     "build:clean": "cross-env BUILD_TARGET=clean node build.js",
-    "build": "node build.js && build"
+    "build": "node build.js"
   },
   "author": "MooseCoin <admin@moosecoin.io>, Lisk Foundation <admin@lisk.io>, lightcurve GmbH <admin@lightcurve.io>",
   "license": "GPL-3.0",
