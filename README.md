@@ -1,6 +1,6 @@
 # Moose Wallet
 
-[![Build Status](https://travis-ci.org/Moosty/moose-wallet.svg?branch=master)](https://travis-ci.org/Moosty/moose-wallet)
+[![Build Status](https://travis-ci.org/Moosty/moose-wallet.svg?branch=testnet-development)](https://travis-ci.org/Moosty/moose-wallet)
 [![Coverage Status](https://coveralls.io/repos/github/Moosty/moose-wallet/badge.svg?branch=master)](https://coveralls.io/github/Moosty/moose-wallet?branch=master)
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
 
