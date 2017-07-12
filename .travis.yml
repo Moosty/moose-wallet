@@ -25,12 +25,22 @@ before_install:
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get install --no-install-recommends -y icnsutils graphicsmagick xz-utils; fi
 install:
 - nvm install 7
-- curl -o- -L https://yarnpkg.com/install.sh | bash
-- source ~/.bashrc
 - npm install -g xvfb-maybe
+- npm install -g npm
+- npm install -g webpack
+- npm install
+- npm install eslint-config-airbnb-base
 script:
 - npm run dist
 branches:
   only:
   - master
   - testnet-development
+deploy:
+  provider: releases
+  file: "dist/*.dmg"
+  file: "dist/*.zip"
+  file: "dist/*.AppImage"
+  skip_cleanup: true
+  on:
+    tags: true
