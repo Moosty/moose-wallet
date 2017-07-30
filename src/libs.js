@@ -7,6 +7,8 @@ import 'angular-aria';
 import 'angular-messages';
 import 'angular-material';
 import 'angular-ui-router';
+import 'angular-qr';
+
 import 'angular-material/angular-material.css';
 import 'angular-material-data-table/dist/md-data-table';
 import 'angular-material-data-table/dist/md-data-table.css';

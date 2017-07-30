@@ -32,10 +32,6 @@ install:
 - npm install eslint-config-airbnb-base
 script:
 - npm run dist
-branches:
-  only:
-  - master
-  - testnet-development
 deploy:
   provider: releases
   file: "dist/*.dmg"
@@ -44,3 +40,4 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+    all_branches: true

@@ -1,0 +1,32 @@
+div.dialog-ico(aria-label='Send funds')
+    form(name='$ctrl.transferForm')
+        md-toolbar
+            .md-toolbar-tools
+                h2 Buy MOOSE
+                span(flex='')
+                md-button.md-icon-button(ng-click='$ctrl.$mdDialog.cancel()', aria-label='Close dialog')
+                    i.material-icons close
+        md-dialog-content
+            .md-dialog-content
+                div
+                    md-input-container.md-block
+                        label Buy MOOSE with
+                        md-select.currency(name='currency', ng-model='$ctrl.currency.value', ng-disabled='$ctrl.loading')
+                            md-option(value='-- Select payment currency --', selected=true) -- Select payment currency --
+                            md-option(ng-repeat="currencies in $ctrl.getCurrencies()", value='{{currencies.value}}') {{currencies.label}}
+                    div.ico-pay(layout="row")
+                        div(flex="50")
+                            md-input-container.md-block
+                                label Payment address
+                                input.payment(type='text', name='payment', ng-model='$ctrl.payment.value', ng-disabled='true')
+                        div(flex="20")
+                            md-button.md-primary(ngclipboard, ng-disabled="!$ctrl.payment.value", data-clipboard-text='{{$ctrl.payment.value}}') {{ 'Copy to clipboard'}}
+                        div(flex="30" ng-if='$ctrl.url')
+                            a(ng-if='$ctrl.currency.value === "btc"' ng-href='{{$ctrl.url}}', target="_blank")
+                                qr(text='$ctrl.url', size='230', type-number="4", image='true')
+                            a(ng-if='$ctrl.currency.value === "eth"', ngclipboard, data-clipboard-text='{{$ctrl.payment.value}}')
+                                qr(text='$ctrl.payment.value', size='230', type-number="4", image='true')
+        md-dialog-actions(layout='row')
+            span.tos(ng-disabled='$ctrl.loading' ) When sending money to any address you will agree to the &nbsp;
+                a(ng-href="https://www.moosecoin.io/tos", target="_blank") Terms of Service
+            md-button.md-secondary(ng-disabled='$ctrl.loading', ng-click='$ctrl.cancel()') {{ 'Cancel' }}

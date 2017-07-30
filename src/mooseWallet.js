@@ -23,6 +23,8 @@ import './components/signVerify/verifyMessage';
 import './components/timestamp/timestamp';
 import './components/top/top';
 import './components/transactions/transactions';
+import './components/ico/ico';
+import './components/icoTransacions/icoTransactions';
 import './theme/theme';
 import './util/animateOnChange/animateOnChange';
 

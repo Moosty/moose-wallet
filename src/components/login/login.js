@@ -24,31 +24,13 @@ app.component('login', {
       this.$rootScope.loggingIn = false;
 
       this.networks = [{
-        name: 'Mainnet',
-        ssl: false,
-        port: 4440,
-      }, {
-        name: 'Testnet',
-        testnet: true,
+        name: 'ICO network',
+        iconet: true,
         port: 4460,
-      }, {
-        name: 'Custom Node',
-        custom: true,
-        address: 'http://localhost:4440',
+        address: 'https://iconet.moosecoin.io',
       }];
 
       this.network = this.networks[0];
-      try {
-        const network = JSON.parse(this.$cookies.get('network'));
-        if (network.custom) {
-          this.networks[2].address = network.address;
-          this.network = this.networks[2];
-        } else if (network.testnet) {
-          this.network = this.networks[1];
-        }
-      } catch (e) {
-        this.$cookies.remove('network');
-      }
 
       this.validity = {
         url: true,
@@ -80,6 +62,7 @@ app.component('login', {
      * @param {String} [_passphrase=this.input_passphrase]
      */
     passConfirmSubmit(_passphrase = this.input_passphrase) {
+     // if (this.network.iconet) {
       this.$rootScope.loggingIn = true;
       this.$scope.$emit('showLoadingBar');
       if (this.Passphrase.normalize.constructor === Function) {
@@ -92,10 +75,22 @@ app.component('login', {
               network: this.network,
             });
             this.$cookies.put('network', JSON.stringify(this.network));
-            this.$state.go(this.$rootScope.landingUrl || 'main.transactions');
+            this.$state.go(this.$rootScope.landingUrl || 'main.icoTransactions');
           }
         });
       }
+      // } else {
+      //   // ico login
+      //   this.$rootScope.loggingIn = true;
+      //   this.$scope.$emit('showLoadingBar');
+      //   this.account.set({
+      //     passphrase: this.Passphrase.normalize(_passphrase),
+      //     network: this.network,
+      //   });
+      //   this.$cookies.put('network', JSON.stringify(this.network));
+      //   this.$scope.$emit('hideLoadingBar');
+      //   this.$state.go(this.$rootScope.landingUrl || 'main.icoTransactions');
+      // }
     }
 
     devTestAccount() {

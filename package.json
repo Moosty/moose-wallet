@@ -1,6 +1,6 @@
 {
   "name": "moose-wallet",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Moose Wallet",
   "homepage": "https://github.com/Moosty/moose-wallet",
   "bugs": "https://github.com/Moosty/moose-wallet/issues",
@@ -34,6 +34,7 @@
     "angular-material": "=1.1.1",
     "angular-material-data-table": "=0.10.9",
     "angular-messages": "=1.5.8",
+    "angular-qr": "^0.2.3",
     "angular-svg-round-progressbar": "=0.4.8",
     "angular-ui-router": "=1.0.0-rc.1",
     "babel-polyfill": "=6.9.1",

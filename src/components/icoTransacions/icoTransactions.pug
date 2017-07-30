@@ -1,0 +1,37 @@
+md-card.offline-hide
+    md-card-content()
+        md-content(layout='row', layout-align='start center', layout-padding, ng-show='!$ctrl.transactions.length && $ctrl.loaded')
+            div(flex)
+            span.empty No ICO transactions found
+        md-content(layout='column', layout-align='center center')
+            md-table-container(ng-show='$ctrl.transactions.length')
+                table(md-table)
+                    thead(md-head)
+                        tr(md-row)
+                            th(md-column) Time
+                            th(md-column) TXID
+                            th(md-column) To
+                            th(md-column) Type
+                            th(md-column) Amount
+                            th(md-column) Moose
+                            th(md-column) Confirmed
+                    tbody(md-body, infinite-scroll='$ctrl.showMore()')
+                        tr(md-row, ng-repeat="transaction in $ctrl.transactions track by transaction.id")
+                            td(md-cell)
+                                span(ng-bind='transaction.time * 1000 | date:"yyyy-MM-dd HH:mm:ss Z"', ng-show='transaction.confirmed')
+                                    md-tooltip(md-direction='top', md-delay='350') {{ transaction.confirmed }} confirmations
+                                spinner(ng-show='!transaction.confirmed')
+                            td(md-cell)
+                                a(ng-bind='transaction.txidShort', target="_blank" ng-href='https://blockchain.info/tx/{{transaction.txid}}')
+                                    md-tooltip(md-direction='top', md-delay='350') {{ transaction.txid }}
+                            td(md-cell)
+                                span(ng-bind='transaction.address')
+                            td(md-cell)
+                                span(ng-bind='transaction.type')
+                            td(md-cell)
+                                moose(amount='transaction.amount') {{transactions.type}}
+                            td(md-cell)
+                                moose(amount='transaction.moose')
+                            td(md-cell)
+                                span(ng-bind='transaction.confirmed')
+            md-button.more-button(ng-show='$ctrl.moreTransactionsExist && $ctrl.loaded', ng-click='$ctrl.showMore()') Load More

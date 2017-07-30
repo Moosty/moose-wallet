@@ -15,6 +15,12 @@ const app = angular.module('app', [
   'infinite-scroll',
   'md.data.table',
   'ngclipboard',
-]);
+  'ja.qr',
+])
+  .config([
+    '$compileProvider', ($compileProvider) => {
+      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|bitcoin|ethereum):/);
+    },
+  ]);
 
 export default app;

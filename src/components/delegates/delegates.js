@@ -65,7 +65,7 @@ app.component('delegates', {
     updateAll() {
       this.delegates = [];
       this.delegatesDisplayedCount = 20;
-      if (this.peers.active) {
+      if (this.peers.active && !this.$rootScope.iconet) {
         this.delegateApi.listAccountDelegates(this.account.get().address,
         ).then((data) => {
           this.votedList = data.delegates || [];
@@ -89,16 +89,18 @@ app.component('delegates', {
      * @param {Number} limit - The maximum number of results
      */
     loadDelegates(offset, search, replace, limit = 100) {
-      this.loading = true;
-      this.$scope.$emit('showLoadingBar');
-      this.delegateApi.listDelegates({
-        offset,
-        limit: limit.toString(),
-        q: search,
-      }).then((data) => {
-        this.addDelegates(data, replace);
-      });
-      this.lastSearch = search;
+      if (!this.$rootScope.iconet) {
+        this.loading = true;
+        this.$scope.$emit('showLoadingBar');
+        this.delegateApi.listDelegates({
+          offset,
+          limit: limit.toString(),
+          q: search,
+        }).then((data) => {
+          this.addDelegates(data, replace);
+        });
+        this.lastSearch = search;
+      }
     }
 
     /**

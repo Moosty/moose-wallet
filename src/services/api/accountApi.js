@@ -6,7 +6,7 @@
  * @module app
  * @submodule AccountApi
  */
-app.factory('AccountApi', function ($q, Peers, Account) {
+app.factory('AccountApi', function ($q, Peers) {
   /**
    * Uses Peers service to fetch the account stats for a given address.
    *
@@ -15,6 +15,11 @@ app.factory('AccountApi', function ($q, Peers, Account) {
    */
   this.get = (address) => {
     const deferred = $q.defer();
+    deferred.resolve({
+      address,
+      balance: 0,
+    });
+    /*
     Peers.active.getAccount(Account.get().address, (data) => {
       if (data.success) {
         deferred.resolve(data.account);
@@ -25,6 +30,7 @@ app.factory('AccountApi', function ($q, Peers, Account) {
         });
       }
     });
+    */
     return deferred.promise;
   };
 

@@ -31,7 +31,13 @@ form(ng-if='$ctrl.step === 2')
           label Enter the missing word
           input(ng-model='$ctrl.missing_input', md-autofocus, aria-label='Enter the missing word')
           div.fee(ng-if='$ctrl.fee') Fee: {{$ctrl.fee}} MOOSE
+      div(ng-if="$ctrl.label === 'Login'")
+        md-input-container.md-block
+          md-checkbox.md-primary(ng-model="$ctrl.isUS", aria-label="Is us") Check this box if you are an investor residing in the United States.
+        md-input-container.md-block
+          md-checkbox.md-primary(ng-if="$ctrl.isUS", ng-model="$ctrl.isSec", aria-label="Is sec") Please confirm that you are an accredited investor as defined in SEC rule 501 of Regulation D.
+
   md-dialog-actions(layout='row')
     md-button.back-button(ng-click="$ctrl.back()") Back
     span(flex)
-    md-button.md-raised.md-primary.ok-button(ng-click="$ctrl.ok()", ng-disabled='!$ctrl.missing_ok', ng-bind='$ctrl.label')
+    md-button.md-raised.md-primary.ok-button(ng-click="$ctrl.ok()", ng-disabled='!$ctrl.missing_ok || ($ctrl.label === "Login" && ($ctrl.isUS && !$ctrl.isSec))', ng-bind='$ctrl.label')

@@ -1,4 +1,4 @@
-version: 0.0.1-{build}
+version: 0.0.3-{build}
 os: unstable
 
 platform:
@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - testnet-development
+    - ico
 
 environment:
   NODE_ENV: prod
