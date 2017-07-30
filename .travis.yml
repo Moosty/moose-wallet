@@ -36,6 +36,7 @@ branches:
   only:
   - master
   - testnet-development
+  - ico
 deploy:
   provider: releases
   file: "dist/*.dmg"

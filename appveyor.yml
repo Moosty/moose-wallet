@@ -8,6 +8,7 @@ branches:
   only:
     - master
     - testnet-development
+    - ico
 
 environment:
   NODE_ENV: prod
