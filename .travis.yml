@@ -32,6 +32,10 @@ install:
 - npm install eslint-config-airbnb-base
 script:
 - npm run dist
+branches:
+  only:
+  - testnet-development
+  - master
 deploy:
   provider: releases
   file: "dist/*.dmg"
