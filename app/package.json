@@ -1,7 +1,7 @@
 {
-  "name": "moose-wallet",
-  "version": "0.0.1",
-  "description": "MooseCoin Wallet",
+  "name": "Moose Wallet",
+  "version": "0.0.3",
+  "description": "MooseCoin Wallet for ico",
   "main": "main.js",
   "author":{
     "name": "MooseCoin",
