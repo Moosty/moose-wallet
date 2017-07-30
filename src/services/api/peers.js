@@ -1,5 +1,6 @@
 import moose from 'moose-js';
 
+const icoPromise = () => new Promise(resolve => resolve());
 /**
  * This factory provides methods for communicating with peers. It exposes
  * sendRequestPromise method for requesting to available endpoint to the active peer,
@@ -18,7 +19,8 @@ app.factory('Peers', ($timeout, $cookies, $location, $q, $rootScope, dialog) => 
   class Peers {
     constructor() {
       $rootScope.$on('syncTick', () => {
-        if (this.active) this.check();
+        // disable check for ico
+        if (this.active && !this.network.iconet) this.check();
       });
     }
 
@@ -72,6 +74,9 @@ app.factory('Peers', ($timeout, $cookies, $location, $q, $rootScope, dialog) => 
 
       this.active = moose.api(conf);
       this.wasOffline = false;
+      // this.online = true;
+      // return true;
+      // disable check for ico
       return this.check();
     }
 
@@ -87,12 +92,16 @@ app.factory('Peers', ($timeout, $cookies, $location, $q, $rootScope, dialog) => 
      */
     sendRequestPromise(api, urlParams) {
       const deferred = $q.defer();
-      this.active.sendRequest(api, urlParams, (data) => {
-        if (data.success) {
-          return deferred.resolve(data);
-        }
-        return deferred.reject(data);
-      });
+      if (this.network.iconet) {
+        icoPromise().then(() => deferred.reject({ data: false }));
+      } else {
+        this.active.sendRequest(api, urlParams, (data) => {
+          if (data.success) {
+            return deferred.resolve(data);
+          }
+          return deferred.reject(data);
+        });
+      }
       return deferred.promise;
     }
 
@@ -114,19 +123,24 @@ app.factory('Peers', ($timeout, $cookies, $location, $q, $rootScope, dialog) => 
           this.wasOffline = false;
         })
         .catch((data) => {
-          this.online = false;
-          if (!this.wasOffline) {
-            const address = `${this.active.currentPeer}:${this.active.port}`;
-            let message = `Failed to connect to node ${address}. `;
-            if (data && data.error && data.error.code === 'EUNAVAILABLE') {
-              message = `Failed to connect: Node ${address} is not active`;
-            } else if (!(data && data.error && data.error.code)) {
-              message += ' Make sure that you are using the latest version of Moose Wallet.';
+          if (this.network.iconet) {
+            this.online = true;
+            this.wasOffline = false;
+          } else {
+            this.online = false;
+            if (!this.wasOffline) {
+              const address = `${this.active.currentPeer}:${this.active.port}`;
+              let message = `Failed to connect to node ${address}. `;
+              if (data && data.error && data.error.code === 'EUNAVAILABLE') {
+                message = `Failed to connect: Node ${address} is not active`;
+              } else if (!(data && data.error && data.error.code)) {
+                message += ' Make sure that you are using the latest version of Moose Wallet.';
+              }
+              dialog.errorToast(message);
+              $rootScope.$emit('showLoadingBar', 'connection');
             }
-            dialog.errorToast(message);
-            $rootScope.$emit('showLoadingBar', 'connection');
+            this.wasOffline = true;
           }
-          this.wasOffline = true;
         });
     }
   }

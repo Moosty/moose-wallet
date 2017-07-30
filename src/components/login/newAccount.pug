@@ -21,4 +21,4 @@ div.dialog-primary(aria-label='Generate a primary passphrase for a new account',
       span(flex)
       md-button.md-raised.md-primary.submit-button.next-button(ng-click='$ctrl.step = 1') Next
     section(data-ng-if='$ctrl.step === 1')
-      passphrase(data-on-save='onSave', data-label='Login')
+      passphrase(ng-disabled="$ctrl.isUS && !$ctrl.isSec" data-on-save='onSave', data-label='Login')

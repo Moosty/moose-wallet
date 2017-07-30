@@ -16,6 +16,10 @@ app.config(($stateProvider, $urlRouterProvider) => {
       url: '/main',
       component: 'main',
     })
+    .state('main.icoTransactions', {
+      url: '/icotransactions',
+      component: 'icoTransactions',
+    })
     .state('main.transactions', {
       url: '/transactions',
       component: 'transactions',

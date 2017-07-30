@@ -23,7 +23,7 @@ function createWindow() {
   });
   win.on('blur', () => win.webContents.send('blur'));
   win.on('focus', () => win.webContents.send('focus'));
-//  win.webContents.openDevTools()
+  // win.webContents.openDevTools();
 
   const template = [
     {
@@ -77,25 +77,19 @@ function createWindow() {
         {
           label: 'MooseCoin Website',
           click() {
-            electron.shell.openExternal('https://moosecoin.io');
+            electron.shell.openExternal('https://www.moosecoin.io');
           },
         },
         {
-          label: 'MooseCoin Chat',
+          label: 'MooseCoin Slack',
           click() {
-            electron.shell.openExternal('https://moose.chat');
+            electron.shell.openExternal('https://moosecoin.slack.com/');
           },
         },
         {
-          label: 'MooseCoin Explorer',
+          label: 'MooseCoin Blog',
           click() {
-            electron.shell.openExternal('https://explorer.moosecoin.io');
-          },
-        },
-        {
-          label: 'Moose Forum',
-          click() {
-            electron.shell.openExternal('https://forum.moosecoin.io');
+            electron.shell.openExternal('https://www.moosecoin.io/blog/');
           },
         },
         {
@@ -141,7 +135,7 @@ function createWindow() {
           const options = {
             buttons: ['OK'],
             icon: `${__dirname}/assets/moose.png`,
-            message: `MooseCoin Wallet\nVersion ${app.getVersion()}\n${copyright}`,
+            message: `MooseCoin ICO Wallet\nVersion ${app.getVersion()}\n${copyright}`,
           };
           electron.dialog.showMessageBox(focusedWindow, options, () => {});
         }
@@ -194,7 +188,7 @@ app.on('window-all-closed', () => {
 // This will override the values defined in the app’s .plist file (macOS)
 if (process.platform === 'darwin') {
   app.setAboutPanelOptions({
-    applicationName: 'MooseCoin Wallet',
+    applicationName: 'MooseCoin ICO Wallet',
     copyright,
   });
 }

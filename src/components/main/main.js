@@ -53,13 +53,18 @@ app.component('main', {
         .then(() => {
           this.$scope.$emit('hideLoadingBar');
           this.$rootScope.logged = true;
+
+          const now = Math.round(new Date().getTime() / 1000.0);
+          if ((now >= 1501459199 && now <= 1506815999) || this.account.account.address === '10145817185605078525M') {
+            this.$rootScope.open = true;
+          }
           if (this.$timeout) {
             clearTimeout(this.$timeout);
             delete this.$timeout;
           }
 
           if (this.account.get() && this.account.get().publicKey) {
-            this.checkIfIsDelegate();
+           // this.checkIfIsDelegate();
             this.$scope.$on('syncTick', this.update.bind(this));
           }
         })
@@ -81,7 +86,8 @@ app.component('main', {
      * @todo This property can be included in accountApi.get to
      *  eliminate this Api call
      */
-    checkIfIsDelegate() {
+    // checkIfIsDelegate() {
+      /*
       this.peers.active.sendRequest('delegates/get', {
         publicKey: this.account.get().publicKey,
       }, (data) => {
@@ -93,7 +99,8 @@ app.component('main', {
           });
         }
       });
-    }
+      */
+   // }
 
     /**
      * Sets account credentials and balance using accountApi.get
