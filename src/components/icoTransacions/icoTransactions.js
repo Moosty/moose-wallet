@@ -93,8 +93,7 @@ app.component('icoTransactions', {
      * @returns {promise} Api call promise
      */
     loadTransactions() {
-      return $.post(`${this.$rootScope.api}/address/txs`,
-        JSON.stringify({ address: this.account.account.address }))
+      return $.get(`${this.$rootScope.api}/ico/txs/${this.account.account.address}`)
         .then((resp) => {
           if (resp && resp.length > 0) {
             let id = 0;

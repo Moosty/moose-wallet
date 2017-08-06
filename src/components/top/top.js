@@ -23,10 +23,10 @@ app.component('top', {
     }
 
     loadIcoBalance() {
-      return $.get(`${this.$rootScope.api}/address/status/${this.account.account.address}`)
+      return $.get(`${this.$rootScope.api}/ico/${this.account.account.address}`)
         .then((resp) => {
-          if (resp && resp.totalMoose) {
-            this.balance = resp.totalMoose;
+          if (resp && resp.amount) {
+            this.balance = resp.amount;
           }
         });
     }

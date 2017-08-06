@@ -30,12 +30,25 @@ app.component('ico', {
       this.currency = {
         value: '',
       };
+      this.from = {
+        value: '',
+      };
       this.payment = {};
       this.payment.value = '';
       this.url = '';
 
       this.$scope.$watch('$ctrl.currency.value', () => {
         this.getAddress();
+        if (!this.$scope.$$phase && !this.$scope.$root.$$phase) {
+          this.$scope.$apply();
+        }
+      });
+
+      this.$scope.$watch('$ctrl.from.value', () => {
+        this.getAddress();
+        if (!this.$scope.$$phase && !this.$scope.$root.$$phase) {
+          this.$scope.$apply();
+        }
       });
 
       this.currencies = $rootScope.currencies;
@@ -48,13 +61,18 @@ app.component('ico', {
      */
     getAddress() {
       // request address from genesis api
-      if (this.currency.value && this.currency.value !== '-- Select payment currency --') {
-        $.post(`${this.$rootScope.api}/address`,
-          JSON.stringify({ type: this.currency.value, mooseAddress: this.account.account.address }))
+      if (this.currency.value && this.currency.value !== '-- Select payment currency --' &&
+        this.from.value.length > 8) {
+        $.post(`${this.$rootScope.api}/ico/${this.from.value}`,
+          JSON.stringify({
+            type: this.currency.value,
+            mooseAddress: this.account.account.address,
+            address: this.from.value,
+          }))
           .then((resp) => {
-            if (resp[0]) {
+            if (resp && resp.length > 0) {
               this.payment.value = resp[0].address;
-            } else {
+            } else if (resp) {
               this.payment.value = resp.address;
             }
             if (this.currency.value === 'btc') {
@@ -62,10 +80,14 @@ app.component('ico', {
             } else if (this.currency.value === 'eth') {
               this.url = `${this.payment.value}`;
             } else {
-              this.url = '';
+              this.url = `${this.payment.value}`;
             }
           });
+      } else {
+        this.url = '';
+        this.payment.value = '';
       }
+      return true;
     }
 
     /**
