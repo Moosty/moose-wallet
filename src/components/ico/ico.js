@@ -46,9 +46,6 @@ app.component('ico', {
 
       this.$scope.$watch('$ctrl.from.value', () => {
         this.getAddress();
-        if (!this.$scope.$$phase && !this.$scope.$root.$$phase) {
-          this.$scope.$apply();
-        }
       });
 
       this.currencies = $rootScope.currencies;
@@ -81,6 +78,9 @@ app.component('ico', {
               this.url = `${this.payment.value}`;
             } else {
               this.url = `${this.payment.value}`;
+            }
+            if (!this.$scope.$$phase && !this.$scope.$root.$$phase) {
+              this.$scope.$apply();
             }
           });
       } else {

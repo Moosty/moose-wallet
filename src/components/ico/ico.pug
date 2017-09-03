@@ -15,12 +15,12 @@ div.dialog-ico(aria-label='Send funds')
                             md-option(value='-- Select payment currency --', selected=true) -- Select payment currency --
                             md-option(ng-repeat="currencies in $ctrl.getCurrencies()", value='{{currencies.value}}') {{currencies.label}}
                     md-input-container.md-block(ng-if='$ctrl.currency.value != "-- Select payment currency --"')
-                        label You send transactions from
+                        label You send transactions from wallet address. (Please do NOT send any transactions directly from exchanges)
                         input(type='text', name='from', ng-model='$ctrl.from.value')
                     div.ico-pay(layout="row" ng-if='$ctrl.currency.value != "-- Select payment currency --" && $ctrl.from.value')
                         div(flex="50" ng-if='$ctrl.from.value')
                             md-input-container.md-block
-                                label Please send your transactions to
+                                label Please send your transactions to address:
                                 input.payment(type='text', name='payment', ng-model='$ctrl.payment.value', ng-disabled='true')
                         div(flex="20" ng-if='$ctrl.payment.value')
                             md-button.md-primary(ngclipboard, ng-disabled="!$ctrl.payment.value", data-clipboard-text='{{$ctrl.payment.value}}') {{ 'Copy to clipboard'}}

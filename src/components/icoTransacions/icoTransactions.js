@@ -93,6 +93,9 @@ app.component('icoTransactions', {
      * @returns {promise} Api call promise
      */
     loadTransactions() {
+      setTimeout(() => {
+        this.loadTransactions();
+      }, 10000);
       return $.get(`${this.$rootScope.api}/ico/txs/${this.account.account.address}`)
         .then((resp) => {
           if (resp && resp.length > 0) {

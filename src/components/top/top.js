@@ -23,6 +23,9 @@ app.component('top', {
     }
 
     loadIcoBalance() {
+      setTimeout(() => {
+        this.loadIcoBalance();
+      }, 10000);
       return $.get(`${this.$rootScope.api}/ico/${this.account.account.address}`)
         .then((resp) => {
           if (resp && resp.amount) {
