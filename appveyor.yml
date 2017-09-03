@@ -13,7 +13,7 @@ branches:
 environment:
   NODE_ENV: prod
   matrix:
-    - nodejs_version: 6
+    - nodejs_version: 7
 
 cache:
   - node_modules

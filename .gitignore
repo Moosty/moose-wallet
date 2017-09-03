@@ -11,4 +11,3 @@ app/*.map
 app/app.js
 .vscode
 .idea
-package-lock.json
